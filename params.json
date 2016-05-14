@@ -1,0 +1,6 @@
+{
+  "name": "Driver fan 5v",
+  "tagline": "",
+  "body": "### Driver_fan_5V\r\nThis design allows the piloting of a fan powered at 5V by means of a control signal from 3.3V .\r\n\r\nIn my case , I had available the GPIO of the pi- Raspberry and I wanted the fan turning on and went out automatically and intelligently based on the temperature detected by the CPU .\r\n\r\nHere you can find the schematic of the circuit that I made , and scripts that I made for the piloting of a GPIO pins via two board : Raspberry-pi and Orange-pi",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
