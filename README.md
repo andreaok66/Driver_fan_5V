@@ -1,9 +1,15 @@
 # Driver_fan_5V
-Questo progetto permette il pilotaggio di una ventola alimentata a 5V tramite un segnale di controllo da 3.3V.
-Nel mio caso specifico, avevo a disposizione la GPIO del Raspberry-pi e volevo che la ventola si accendesse e si spegnesse in modo automatico ed intelligente in base alla temperatura rilevata dalla CPU.
-Qui potete trovare lo schematic del circuito che ho realizzato, e gli script che ho realizzato per il pilotaggio di un pin GPIO tramite due board: Raspberry-pi e Orange-pi
+With this project I built a small automated cooling system to keep the board CPU temperature below a certain threshold (safety threshold). This change has brought significant advantages in terms of safety to avoid damage due to excessive temperature rise of the device. Not a necessary upgrade but highly recommended.
+(Obviously, before resorting to this solution it is also possible to apply some easy to mount heat sinks to obtain a small temperature drop)
 
+Components:
+- RaspberryPI/OrangePI or similar ...
+- Small fan 5V
+- BJT Transistor (NPN 2N2222)
+- Resistance
+- SStripboard, welder, cables, and so on ...
 
-Per gestire l'accensione e lo spegnimento della ventolina ho deciso di usare crontab per l'esecuzione dello script ogni 10 minuti, e ho scritto un semplice programma in linguaggio C.
-Basta installare la libreria wiringPi, compilare il programma fan_v1.c ed programmare la sua esecuzione su crontab.
-Nel mio caso crontab deve chiamare il file fan.sh e quest'ultimo chiama il file compilato ed eseguibile.
+First of all I monitored the temperatures of the device when it is unused and when it is fully operational. I chose an average temperature as a treshold above which to start the fan.
+I chose to monitor the temperature vis SW through a system call carried out by a bash script. This script will be called periodically via crontab.
+When the fan needs to be turned on, a high signal is sent to a GPIO output. Since the fan works at 5V and the 3.3V GPIO, it is necessary to use a transistor as a switch. The GPIO in fact activates the transistor that allows the connection between the fan and the 5V (the power is taken from the board since the load is low)
+Finally, the circuit is welded and fixed on the suitably perforated case (to take fresh air), and the whole is closed by positioning the fan in the direction of the CPU.
